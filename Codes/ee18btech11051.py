@@ -14,7 +14,7 @@ radius = 10*np.sqrt((1+np.square(omega))/(100+np.square(omega)))
 
 plt.plot(radius*np.cos(theta), radius * np.sin(theta))
 
-ax = plt.subplot(1, projection='polar')
+ax = plt.subplot(111, projection='polar')
 ax.plot(theta, radius)
 ax.set_rmax(11)
 ax.set_rlabel_position(0)
