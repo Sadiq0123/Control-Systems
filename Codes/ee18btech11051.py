@@ -13,9 +13,12 @@ theta = np.arctan(omega)-np.arctan(omega/10)
 radius = 10*np.sqrt((1+np.square(omega))/(100+np.square(omega)))
 
 plt.plot(radius*np.cos(theta), radius * np.sin(theta))
-plt.xlim([-2,12])
-plt.ylim([-2,8])
-plt.axhline(0, color = 'black')
-plt.axvline(0, color = 'black')
-plt.grid()
+
+ax = plt.subplot(1, projection='polar')
+ax.plot(theta, radius)
+ax.set_rmax(11)
+ax.set_rlabel_position(0)
+
+ax.grid(True)
+
 plt.show()
