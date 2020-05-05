@@ -48,8 +48,8 @@ plt.axhline(y = -180,xmin=0,color = 'r',linestyle='dashed')
 plt.grid() 
 
 #If termux
-plt.savefig('./figs/ee18btech11051/ee18btech11051_fig1.pdf')
-plt.savefig('./figs/ee18btech11051/ee18btech11051_fig1.eps')
+plt.savefig('./figs/ee18btech11051/ee18btech11051_fig3.pdf')
+plt.savefig('./figs/ee18btech11051/ee18btech11051_fig3.eps')
 subprocess.run(shlex.split("termux-open ./figs/ee18btech11051/ee18btech11051_fig1.pdf"))
 
 #else
