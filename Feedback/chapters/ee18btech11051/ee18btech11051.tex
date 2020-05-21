@@ -1,0 +1,105 @@
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%\begin{enumerate}[label=\thesection.\arabic*.,ref=\thesection.\theenumi]
+\numberwithin{equation}{enumi}
+
+\item
+
+For the circuit in Fig. \ref{fig:ee18btech11051_fig1}, break the loop at node X and find the loop gain (working backward for simplicity to find $V_{X}$ in terms of $V_{O}$). For R = 10 k$\ohm$, find C and $R_{f}$ to obtain sinusoidal oscillations at 10 kHz.
+
+\begin{figure}[!ht]
+	\begin{center}
+		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11051/ee18btech11051_fig1.tex}}
+	\end{center}
+\caption{}
+\label{fig:ee18btech11051_fig1}
+\end{figure}
+
+\item
+\solution
+We first calculate the relation between $V_{3}$ and $V_{X}$ in fig \ref{fig:ee18btech11051_fig2} by using the relation between the currents as follows:
+\begin{figure}[!ht]
+	\begin{center}
+		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11051/ee18btech11051_fig2.tex}}
+	\end{center}
+\caption{}
+\label{fig:ee18btech11051_fig2}
+\end{figure}
+
+Applying KVL between $V_{2}$ and $V_{3}$, we get
+\begin{align}
+    V_{2} = V_{3} + I_{3}R\\
+    V_{3} = \frac{I_{3}}{sC}\\
+    \implies V_{2} = V_{3}(1+sRC) \label{eq:ee18btech11051_1}
+\end{align}
+Then, KCL between $V_{1}$ and $V_{2}$ gives 
+\begin{align}
+    V_{1} = V_{2} + I_{2}R\\
+    I_{2} = I_{3} + V_{2}sC
+    \implies I_{2} = V_{3}sC + V_{2}sC\\
+    \implies V_{1} = V_{2}(1+sRC) + V_{3}sRC \label{eq:ee18btech11051_2}
+\end{align}
+Now, using the equations eq.\ref{eq:ee18btech11051_1} and eq.\ref{eq:ee18btech11051_2}, we get
+\begin{align}
+    V_{1} = V_{3}((1+sRC)^{2}+sRC)\\
+    \implies V_{1} = V_{3}(1+ 3sRC+ (sRC)^{2})\label{eq:ee18btech11051_3}
+\end{align}
+
+KCL and KVL between $V_{X}$ and $V_{1}$ gives 
+\begin{align}
+    V_{X} = V_{1} + I_{1}R\\
+    I_{1} = I_{2} + V_{1}sC\\
+    \implies I_{1} = V_{3}sC + V_{2}sC + V_{1}sC\\
+    \implies V_{X} = V_{1}(1+sRC) + V_{2}sRC + V_{3}sRC
+    \label{eq:ee18btech11051_4}
+\end{align}
+Substituting eq.\ref{eq:ee18btech11051_1} and eq.\ref{eq:ee18btech11051_3} in eq.\ref{eq:ee18btech11051_4}:
+\begin{multline}
+    V_{X} = V_{3}((1+sRC)(1+ 3sRC+ (sRC)^{2})\\+(1+sRC)(sRC)+sRC)
+\end{multline}
+\begin{align}
+    \implies V_{X} = V_{3}(1+ 6sRC+ 5(sRC)^{2}+ (sRC)^{3}) \label{eq:ee18btech11051_5}
+\end{align}
+Substituting $ s = j\omega$ in the eq.\ref{eq:ee18btech11051_5} gives:
+\begin{align}
+    V_{X} = V_{3}((1+5(\omega RC)^{2}) + j(6\omega RC - (\omega RC)^{3})) \label{eq:ee18btech11051_6}
+\end{align}
+The relation between $V_{3}$ and $V_{O}$ is:
+\begin{align}
+    \frac{V_{3}}{R} = -\frac{V_{O}}{R_{f}}\\
+     V_{3} = -V_{O}(\frac{R}{R_{f}})\\
+     V_{X} = -V_{O}\frac{((1-5(\omega RC)^{2}) + j(6\omega RC - (\omega RC)^{3}))R}{R_{f}}
+\end{align}
+To make the circuit oscillate at a particular frequency, we equate the imaginary part of the eq.\ref{eq:ee18btech11051_6} to zero.
+\begin{align}
+    6\omega RC -(\omega RC)^{3}=0 \implies (\omega RC)^{2} = 6\\
+    V_{X} = -V_{O}\frac{(1 - 5(6))R}{R_{f}}\\
+    \implies V_{X} = V_{O}\frac{29R}{R_{f}}
+\end{align}
+So, we get the final expression for the open loop gain and feedback gain as:
+\begin{align}
+    \alpha = \frac{R_{f}}{29R}  ,   \beta = 1
+\end{align}
+To make the oscillator stable, we need to have $\alpha \beta = 1$. So, we get
+\begin{align}
+    \frac{R_{f}}{29R} = 1 \implies R_{f} = 29R = 290k\ohm
+\end{align}
+Also, as we already know that $(\omega RC)^{2} = 6$, the oscillator frequency ($2\pi f = \omega$) can be set by varying the capacitor value.
+\begin{align}
+    \omega RC = \sqrt{6} \implies C = \frac{\sqrt{6}}{2\pi Rf}
+    \\ C = 3.89 nF
+\end{align}
+Therefore, the values of C and $R_{f}$ for the desired oscillator are 3.89nF and 290k$\ohm$.
+\begin{table}[!ht]
+    \centering
+    \input{./tables/ee18btech11051/ee18btech11051_table1.tex}
+    \caption{Design Parameters}
+    \label{table:ee18btech11051_table_1}
+\end{table}
+
+\item
+Verification:\\
+
+
+
+
+\end{enumerate}
