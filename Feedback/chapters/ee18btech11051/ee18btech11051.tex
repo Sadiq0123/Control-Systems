@@ -16,7 +16,7 @@ For the circuit in Fig. \ref{fig:ee18btech11051_fig1}, break the loop at node X 
 
 \item
 \solution
-We first calculate the relation between $V_{3}$ and $V_{X}$ in fig \ref{fig:ee18btech11051_fig2} by using the relation between the currents as follows:
+We first calculate the relation between $I_{4}$ and $V_{X}$ in fig \ref{fig:ee18btech11051_fig2} by using the relation between the currents and the fact that the inverting terminal of the Op-Amp is virtually grounded as follows:
 \begin{figure}[!ht]
 	\begin{center}
 		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11051/ee18btech11051_fig2.tex}}
@@ -25,72 +25,67 @@ We first calculate the relation between $V_{3}$ and $V_{X}$ in fig \ref{fig:ee18
 \label{fig:ee18btech11051_fig2}
 \end{figure}
 
-Applying KVL between $V_{2}$ and $V_{3}$, we get
+Here, $V_{4}$ has zero voltage. Applying KVL between $V_{3}$ and $V_{4}$, we get
 \begin{align}
-    V_{2} = V_{3} + I_{3}R\\
-    V_{3} = \frac{I_{3}}{sC}\\
-    \implies V_{2} = V_{3}(1+sRC) \label{eq:ee18btech11051_1}
-\end{align}
-Then, KCL between $V_{1}$ and $V_{2}$ gives 
-\begin{align}
-    V_{1} = V_{2} + I_{2}R\\
-    I_{2} = I_{3} + V_{2}sC
-    \implies I_{2} = V_{3}sC + V_{2}sC\\
-    \implies V_{1} = V_{2}(1+sRC) + V_{3}sRC \label{eq:ee18btech11051_2}
-\end{align}
-Now, using the equations eq.\ref{eq:ee18btech11051_1} and eq.\ref{eq:ee18btech11051_2}, we get
-\begin{align}
-    V_{1} = V_{3}((1+sRC)^{2}+sRC)\\
-    \implies V_{1} = V_{3}(1+ 3sRC+ (sRC)^{2})\label{eq:ee18btech11051_3}
+    V_{3} = I_{4}R \label{eq:ee18btech11051_0}
 \end{align}
 
-KCL and KVL between $V_{X}$ and $V_{1}$ gives 
+Applying KCL and KVL between $V_{2}$ and $V_{3}$, and substituting eq.\ref{eq:ee18btech11051_0} gives
+\begin{align}
+    I_{3} = I_{4} + V_{3}sC \implies I_{3} = I_{4}(1+sRC) \label{eq:ee18btech11051_1}\\
+    V_{2} = V_{3} + I_{3}R
+    \implies V_{2} = I_{4}R(2+sRC) \label{eq:ee18btech11051_2}
+\end{align}
+
+Using eq.\ref{eq:ee18btech11051_1} and eq.\ref{eq:ee18btech11051_2} in KCL at node $V_{2}$ 
+\begin{align}
+    I_{2} = I_{3} + V_{2}sC\\
+    I_{2} = I_{4}((1+sRC) + sRC(2+sRC))\\
+    \implies = I_{2} = I_{4}(1+3sRC+(sRC)^{2}) \label{eq:ee18btech11051_3}
+\end{align}
+
+Applying KVL between nodes $V_{1}$ and $V_{2}$, and substituting eq.\ref{eq:ee18btech11051_2} and eq.\ref{eq:ee18btech11051_3} gives
+\begin{align}
+    V_{1} = V_{2}+ I_{2}R\\
+    \implies V_{1} = I_{4}R(3+4sRC+(sRC)^{2})\label{eq:ee18btech11051_4}
+\end{align}
+
+Substituting eq.\ref{eq:ee18btech11051_3} and eq.\ref{eq:ee18btech11051_4} in KCL at node $V_{1}$ gives
+\begin{align}
+    I_{1} = I_{2} + V_{1}sC\\
+    \implies I_{1} = I_{4}(1+6sRC+5(sRC)^2+(sRC)^3)\label{eq:ee18btech11051_5}
+\end{align}
+
+KVL between $V_{X}$ and $V_{1}$, and using eq.\ref{eq:ee18btech11051_4} and eq.\ref{eq:ee18btech11051_5} gives 
 \begin{align}
     V_{X} = V_{1} + I_{1}R\\
-    I_{1} = I_{2} + V_{1}sC\\
-    \implies I_{1} = V_{3}sC + V_{2}sC + V_{1}sC\\
-    \implies V_{X} = V_{1}(1+sRC) + V_{2}sRC + V_{3}sRC
-    \label{eq:ee18btech11051_4}
+    \implies V_{X} = I_{4}R(4+10sRC+6(sRC)^2+(sRC)^3)
+    \label{eq:ee18btech11051_6}
 \end{align}
-Substituting eq.\ref{eq:ee18btech11051_1} and eq.\ref{eq:ee18btech11051_3} in eq.\ref{eq:ee18btech11051_4}:
-\begin{multline}
-    V_{X} = V_{3}((1+sRC)(1+ 3sRC+ (sRC)^{2})\\+(1+sRC)(sRC)+sRC)
-\end{multline}
+
+Substituting $ s = j\omega$ in the eq.\ref{eq:ee18btech11051_6}:
 \begin{align}
-    \implies V_{X} = V_{3}(1+ 6sRC+ 5(sRC)^{2}+ (sRC)^{3}) \label{eq:ee18btech11051_5}
+    V_{X} = I_{4}R((4-6(\omega RC)^{2}) + j(10\omega RC - (\omega RC)^{3})) \label{eq:ee18btech11051_7}
 \end{align}
-Substituting $ s = j\omega$ in the eq.\ref{eq:ee18btech11051_5} gives:
+The relation between $I_{4}$ and $V_{O}$ is:
 \begin{align}
-    V_{X} = V_{3}((1+5(\omega RC)^{2}) + j(6\omega RC - (\omega RC)^{3})) \label{eq:ee18btech11051_6}
+    V_{O} = -I_{4} R_{f}
 \end{align}
-The relation between $V_{3}$ and $V_{O}$ is:
+So, the transfer function GH from eq.\ref{eq:ee18btech11051_7} is
 \begin{align}
-    \frac{V_{3}}{R} = -\frac{V_{O}}{R_{f}}\\
-     V_{3} = -V_{O}(\frac{R}{R_{f}})
+     GH = \frac{V_{O}}{V_{X}} = -\frac{R_{f}}{R((4-6(\omega RC)^{2}) + j(10\omega RC - (\omega RC)^{3}))} \label{eq:ee18btech11051_8}
 \end{align}
+To make the system oscillate at a frequency $f_{O}$,
 \begin{align}
-     V_{X} = -V_{O}\frac{((1-5(\omega RC)^{2}) + j(6\omega RC - (\omega RC)^{3}))R}{R_{f}}
+    |GH|=1\\ \angle GH = 0^{\degree} \\
+    \implies (\omega RC)^{2} = 10 \label{eq:ee18btech11051_9}\\
+    \implies C = \frac{\sqrt{10}}{2\pi f_{O}R} = 5.03nF
 \end{align}
-To make the circuit oscillate at a particular frequency, we equate the imaginary part of the eq.\ref{eq:ee18btech11051_6} to zero.
+Putting GH = 1 in eq.\ref{eq:ee18btech11051_8} gives:
 \begin{align}
-    6\omega RC -(\omega RC)^{3}=0 \implies (\omega RC)^{2} = 6 \label{eq:ee18btech11051_7}\\
-    V_{X} = -V_{O}\frac{(1 - 5(6))R}{R_{f}}\\
-    \implies V_{X} = V_{O}\frac{29R}{R_{f}}
+    -\frac{R_{f}}{R(4-6(10))} = 1 \implies R_{f} = 56R = 560k\ohm
 \end{align}
-So, we get the final expression for the open loop gain and feedback gain as:
-\begin{align}
-    \alpha = \frac{R_{f}}{29R}  ,   \beta = 1
-\end{align}
-To make the oscillator stable, we need to have $\alpha \beta = 1$. So, we get
-\begin{align}
-    \frac{R_{f}}{29R} = 1 \implies R_{f} = 29R = 290k\ohm
-\end{align}
-Also, as we already know from eq.\ref{eq:ee18btech11051_7} that $(\omega RC)^{2} = 6$, the oscillator frequency ($2\pi f = \omega$) can be set to 10kHz by varying the capacitor value.
-\begin{align}
-    \omega RC = \sqrt{6} \implies C = \frac{\sqrt{6}}{2\pi Rf}
-    \\ C = 3.89 nF
-\end{align}
-Therefore, the values of C and $R_{f}$ for the desired oscillator are 3.89nF and 290k$\ohm$.
+Therefore, the values of C and $R_{f}$ for the desired oscillator are 5.03nF and 560k$\ohm$.
 \begin{table}[!ht]
     \centering
     \input{./tables/ee18btech11051/ee18btech11051_table1.tex}
@@ -100,6 +95,7 @@ Therefore, the values of C and $R_{f}$ for the desired oscillator are 3.89nF and
 
 \item
 Verification:\\
+The value of $R_{f}$ is kept slightly above the calculated value for the system to start oscillating
 
 
 
