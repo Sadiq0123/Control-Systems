@@ -66,12 +66,14 @@ Substituting $ s = j\omega$ in the eq.\ref{eq:ee18btech11051_5} gives:
 The relation between $V_{3}$ and $V_{O}$ is:
 \begin{align}
     \frac{V_{3}}{R} = -\frac{V_{O}}{R_{f}}\\
-     V_{3} = -V_{O}(\frac{R}{R_{f}})\\
+     V_{3} = -V_{O}(\frac{R}{R_{f}})
+\end{align}
+\begin{align}
      V_{X} = -V_{O}\frac{((1-5(\omega RC)^{2}) + j(6\omega RC - (\omega RC)^{3}))R}{R_{f}}
 \end{align}
 To make the circuit oscillate at a particular frequency, we equate the imaginary part of the eq.\ref{eq:ee18btech11051_6} to zero.
 \begin{align}
-    6\omega RC -(\omega RC)^{3}=0 \implies (\omega RC)^{2} = 6\\
+    6\omega RC -(\omega RC)^{3}=0 \implies (\omega RC)^{2} = 6 \label{eq:ee18btech11051_7}\\
     V_{X} = -V_{O}\frac{(1 - 5(6))R}{R_{f}}\\
     \implies V_{X} = V_{O}\frac{29R}{R_{f}}
 \end{align}
@@ -83,7 +85,7 @@ To make the oscillator stable, we need to have $\alpha \beta = 1$. So, we get
 \begin{align}
     \frac{R_{f}}{29R} = 1 \implies R_{f} = 29R = 290k\ohm
 \end{align}
-Also, as we already know that $(\omega RC)^{2} = 6$, the oscillator frequency ($2\pi f = \omega$) can be set by varying the capacitor value.
+Also, as we already know from eq.\ref{eq:ee18btech11051_7} that $(\omega RC)^{2} = 6$, the oscillator frequency ($2\pi f = \omega$) can be set to 10kHz by varying the capacitor value.
 \begin{align}
     \omega RC = \sqrt{6} \implies C = \frac{\sqrt{6}}{2\pi Rf}
     \\ C = 3.89 nF
