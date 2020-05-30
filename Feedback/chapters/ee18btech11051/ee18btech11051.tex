@@ -19,7 +19,7 @@ For the circuit in Fig. \ref{fig:ee18btech11051_fig1}, break the loop at node X 
 We first calculate the relation between $I_{4}$ and $V_{X}$ in fig \ref{fig:ee18btech11051_fig2} by using the relation between the currents and the fact that the inverting terminal of the Op-Amp is virtually grounded as follows:
 \begin{figure}[!ht]
 	\begin{center}
-		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11051/ee18btech11051_fig2.tex}}
+		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11051/ee18btech11051_fig3.tex}}
 	\end{center}
 \caption{}
 \label{fig:ee18btech11051_fig2}
@@ -30,62 +30,55 @@ Here, $V_{4}$ has zero voltage. Applying KVL between $V_{3}$ and $V_{4}$, we get
     V_{3} = I_{4}R \label{eq:ee18btech11051_0}
 \end{align}
 
-Applying KCL and KVL between $V_{2}$ and $V_{3}$, and substituting eq.\ref{eq:ee18btech11051_0} gives
-\begin{align}
-    I_{3} = I_{4} + V_{3}sC \implies I_{3} = I_{4}(1+sRC) \label{eq:ee18btech11051_1}\\
-    V_{2} = V_{3} + I_{3}R
-    \implies V_{2} = I_{4}R(2+sRC) \label{eq:ee18btech11051_2}
-\end{align}
-
-Using eq.\ref{eq:ee18btech11051_1} and eq.\ref{eq:ee18btech11051_2} in KCL at node $V_{2}$ 
-\begin{align}
+Starting at node $V_{3}$ to node $V_{X}$, applying KCL and KVL sequentially, and substituting the previous two equations gives:\\
+\begin{multline}
+    I_{3} = I_{4} + V_{3}sC  \\  \implies I_{3} = I_{4}(1+sRC) 
+\end{multline}
+\begin{multline}
+    V_{2} = V_{3} + I_{3}R  \\  \implies V_{2} = I_{4}R(2+sRC)
+\end{multline}
+\begin{multline}
     I_{2} = I_{3} + V_{2}sC\\
-    I_{2} = I_{4}((1+sRC) + sRC(2+sRC))\\
-    \implies = I_{2} = I_{4}(1+3sRC+(sRC)^{2}) \label{eq:ee18btech11051_3}
-\end{align}
-
-Applying KVL between nodes $V_{1}$ and $V_{2}$, and substituting eq.\ref{eq:ee18btech11051_2} and eq.\ref{eq:ee18btech11051_3} gives
-\begin{align}
+    \implies I_{2} = I_{4}(1+3sRC+(sRC)^{2}) 
+\end{multline}
+\begin{multline}
     V_{1} = V_{2}+ I_{2}R\\
-    \implies V_{1} = I_{4}R(3+4sRC+(sRC)^{2})\label{eq:ee18btech11051_4}
-\end{align}
-
-Substituting eq.\ref{eq:ee18btech11051_3} and eq.\ref{eq:ee18btech11051_4} in KCL at node $V_{1}$ gives
-\begin{align}
+    \implies V_{1} = I_{4}R(3+4sRC+(sRC)^{2})
+\end{multline}
+\begin{multline}
     I_{1} = I_{2} + V_{1}sC\\
-    \implies I_{1} = I_{4}(1+6sRC+5(sRC)^2+(sRC)^3)\label{eq:ee18btech11051_5}
-\end{align}
-
-KVL between $V_{X}$ and $V_{1}$, and using eq.\ref{eq:ee18btech11051_4} and eq.\ref{eq:ee18btech11051_5} gives 
-\begin{align}
+    \implies I_{1} = I_{4}(1+6sRC+5(sRC)^2+(sRC)^3)
+\end{multline}
+\begin{multline}
     V_{X} = V_{1} + I_{1}R\\
     \implies V_{X} = I_{4}R(4+10sRC+6(sRC)^2+(sRC)^3)
-    \label{eq:ee18btech11051_6}
+    \label{eq:ee18btech11051_1}
+\end{multline}
+
+\begin{figure}[!ht]
+	\begin{center}
+		\resizebox{\columnwidth}{!}{\input{./figs/ee18btech11051/ee18btech11051_fig2.tex}}
+	\end{center}
+\caption{}
+\label{fig:ee18btech11051_fig3}
+\end{figure}
+Also, As $V_{O} = -I_{4}R_{f}$, and using eq.\ref{eq:ee18btech11051_1}, we get
+\begin{align}
+    V_{O} = -V_{X}(\frac{R_{f}}{(4+10sRC+6(sRC)^2+(sRC)^3)R})
 \end{align}
 
-Substituting $ s = j\omega$ in the eq.\ref{eq:ee18btech11051_6}:
+The oscillator doesn't have an input, but just a feedback loop with an infinite gain to create oscillations. So, comparing the circuit structure from fig.\ref{fig:ee18btech11051_fig3}, we get
 \begin{align}
-    V_{X} = I_{4}R((4-6(\omega RC)^{2}) + j(10\omega RC - (\omega RC)^{3})) \label{eq:ee18btech11051_7}
+    G(s)H(s) = \frac{V_{O}}{V_{X}} = \frac{R_{f}}{(4+10sRC+6(sRC)^2+(sRC)^3)R}\label{eq:ee18btech11051_2}
 \end{align}
-The relation between $I_{4}$ and $V_{O}$ is:
-\begin{align}
-    V_{O} = -I_{4} R_{f}
-\end{align}
-So, the transfer function GH from eq.\ref{eq:ee18btech11051_7} is
-\begin{align}
-     GH = \frac{V_{O}}{V_{X}} = -\frac{R_{f}}{R((4-6(\omega RC)^{2}) + j(10\omega RC - (\omega RC)^{3}))} \label{eq:ee18btech11051_8}
-\end{align}
-To make the system oscillate at a frequency $f_{O}$,
+
+where, H(s) = 1. To make the system oscillate at a frequency $\omega_{O}$, the phase shift of the loop should be zero, and poles on the imaginary axis
 \begin{align}
     |GH|=1\\ \angle GH = 0^{\degree} \\
-    \implies (\omega RC)^{2} = 10 \label{eq:ee18btech11051_9}\\
-    \implies C = \frac{\sqrt{10}}{2\pi f_{O}R} = 5.03nF
+    \implies (\omega RC)^{2} = 10 \label{eq:ee18btech11051_3}
 \end{align}
-Putting GH = 1 in eq.\ref{eq:ee18btech11051_8} gives:
-\begin{align}
-    -\frac{R_{f}}{R(4-6(10))} = 1 \implies R_{f} = 56R = 560k\ohm
-\end{align}
-Therefore, the values of C and $R_{f}$ for the desired oscillator are 5.03nF and 560k$\ohm$.
+
+After calculating the values of $R_{f}$ and C from eq.\ref{eq:ee18btech11051_2} and eq.\ref{eq:ee18btech11051_3} respectively, the values are:
 \begin{table}[!ht]
     \centering
     \input{./tables/ee18btech11051/ee18btech11051_table1.tex}
@@ -95,9 +88,42 @@ Therefore, the values of C and $R_{f}$ for the desired oscillator are 5.03nF and
 
 \item
 Verification:\\
-The value of $R_{f}$ is kept slightly above the calculated value for the system to start oscillating
+The value of $R_{f}$ is kept slightly above the calculated value for the system to start the oscillations. The impluse response of the resulting transfer function is plotted in fig.\ref{fig:ee18btech11051_plot1} using the plot in 
+\begin{lstlisting}
+codes/ee18btech11051/ee18btech11051_1.py
+\end{lstlisting}
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\columnwidth]{./figs/ee18btech11051/ee18btech11051_plot1.eps}
+\caption{Impulse Response in python}
+\label{fig:ee18btech11051_plot1}
+\end{figure}
 
+The circuit simulated in Spice can be found in
+\begin{lstlisting}
+codes/ee18btech11051/spice/ee18btech11051_spice.asc
+\end{lstlisting}
+and the python code used for plotting the data is
+\begin{lstlisting}
+codes/ee18btech11051/ee18btech11051_2.py
+\end{lstlisting}
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\columnwidth]{./figs/ee18btech11051/ee18btech11051_plot2.eps}
+\caption{Spice Simulation}
+\label{fig:ee18btech11051_plot2}
+\end{figure}
+To verify the frequency of the oscillator, we measure the time lapse between two peaks as shown in fig.\ref{fig:ee18btech11051_plot3}
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\columnwidth]{./figs/ee18btech11051/ee18btech11051_plot3.eps}
+\caption{}
+\label{fig:ee18btech11051_plot3}
+\end{figure}
+The points are (0.0108666, 1.1862) and (0.0109585, 1.1906). So, the time interval between peaks is 0.0109585 - 0.0108666 = 0.0000919.
+So, achieved $f_{O} = \frac{1}{0.0000919} = 10.8kHz$.
+Hence, the design is achieved.
 
 \end{enumerate}
