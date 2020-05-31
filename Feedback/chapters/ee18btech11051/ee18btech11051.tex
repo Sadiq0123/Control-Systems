@@ -30,7 +30,7 @@ Here, $V_{4}$ has zero voltage. Applying KVL between $V_{3}$ and $V_{4}$, we get
     V_{3} = I_{4}R \label{eq:ee18btech11051_0}
 \end{align}
 
-Starting at node $V_{3}$ to node $V_{X}$, applying KCL and KVL sequentially, and substituting the previous two equations gives:\\
+Starting at node $V_{3}$ to node $V_{X}$, applying KCL and KVL sequentially, and substituting the previous two equations gives:
 \begin{multline}
     I_{3} = I_{4} + V_{3}sC  \\  \implies I_{3} = I_{4}(1+sRC) 
 \end{multline}
@@ -69,7 +69,8 @@ Also, As $V_{O} = -I_{4}R_{f}$, and using eq.\ref{eq:ee18btech11051_1}, we get
 
 The oscillator doesn't have an input, but just a feedback loop with an infinite gain to create oscillations. So, comparing the circuit structure from fig.\ref{fig:ee18btech11051_fig3}, we get
 \begin{align}
-    G(s)H(s) = \frac{V_{O}}{V_{X}} = \frac{R_{f}}{(4+10sRC+6(sRC)^2+(sRC)^3)R}\label{eq:ee18btech11051_2}
+    G(s)H(s) = \frac{V_{O}}{V_{X}} = \frac{R_{f}}{(4+10sRC+6(sRC)^2+(sRC)^3)R}
+    \label{eq:ee18btech11051_2}
 \end{align}
 
 where, H(s) = 1. To make the system oscillate at a frequency $\omega_{O}$, the phase shift of the loop should be zero, and poles on the imaginary axis
@@ -83,7 +84,7 @@ After calculating the values of $R_{f}$ and C from eq.\ref{eq:ee18btech11051_2} 
     \centering
     \input{./tables/ee18btech11051/ee18btech11051_table1.tex}
     \caption{Final Values}
-    \label{table:ee18btech11051_table_1}
+    \label{table:ee18btech11051_table1}
 \end{table}
 
 \item
@@ -115,15 +116,17 @@ codes/ee18btech11051/ee18btech11051_2.py
 \caption{Spice Simulation}
 \label{fig:ee18btech11051_plot2}
 \end{figure}
+
 To verify the frequency of the oscillator, we measure the time lapse between two peaks as shown in fig.\ref{fig:ee18btech11051_plot3}
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=\columnwidth]{./figs/ee18btech11051/ee18btech11051_plot3.eps}
 \caption{}
 \label{fig:ee18btech11051_plot3}
 \end{figure}
+
 The points are (0.0108666, 1.1862) and (0.0109585, 1.1906). So, the time interval between peaks is 0.0109585 - 0.0108666 = 0.0000919.
-So, achieved $f_{O} = \frac{1}{0.0000919} = 10.8kHz$.
-Hence, the design is achieved.
+So, achieved $f_{O} = \frac{1}{0.0000919} = 10.8kHz$. Hence, the design is achieved.
 
 \end{enumerate}
